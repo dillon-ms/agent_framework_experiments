@@ -1,0 +1,111 @@
+{
+    "title": "Community-Acquired Pneumonia (CAP®)",
+    "indicators": [
+        { "name": "cough", "description": "Presence of cough as a symptom" },
+        { "name": "shortness_of_breath", "description": "Presence of shortness of breath as a symptom" },
+        { "name": "pleuritic_chest_pain", "description": "Chest pain that worsens with breathing or coughing" },
+        { "name": "oxygen_requirement", "description": "Patient requires supplemental oxygen" },
+        { "name": "radiographic_infiltrates", "description": "Infiltrates seen on chest imaging" },
+        { "name": "patient_in_ICU", "description": "Patient is currently admitted to the ICU" },
+        { "name": "severe_pcn_allergy", "description": "History of severe allergy to penicillin" },
+        { "name": "risk_for_pseudomonas", "description": "Presence of one or more risk factors for Pseudomonas infection" },
+        { "name": "necrotizing_cavitary_pneumonia", "description": "Necrotizing pneumonia with cavitation present" },
+        { "name": "preceding_or_concomitant_influenza_like_illness", "description": "History or presence of influenza-like illness prior to or during pneumonia" },
+        { "name": "pcn_susceptible_s_pneumoniae", "description": "S. pneumoniae isolate susceptible to penicillin" },
+        { "name": "pcn_intermediate_s_pneumoniae", "description": "S. pneumoniae isolate intermediate to penicillin" },
+        { "name": "urine_antigen_positive_s_pneumoniae", "description": "Urine antigen test positive for S. pneumoniae" },
+        { "name": "pcn_resistant_cephalosporin_susceptible_s_pneumoniae", "description": "S. pneumoniae isolate resistant to penicillin but susceptible to cephalosporins" },
+        { "name": "non_beta_lactamase_h_influenzae", "description": "H. influenzae isolate non-beta-lactamase producing" },
+        { "name": "beta_lactamase_h_influenzae", "description": "H. influenzae isolate beta-lactamase producing" },
+        { "name": "l_pneumophila_detected", "description": "Detection of Legionella pneumophila" },
+        { "name": "culture_and_urine_antigen_negative", "description": "Negative cultures and urine antigen tests for bacterial pathogens" }
+    ],
+    "decision_tree": {
+        "title": "Community-Acquired Pneumonia (CAP®) Decision Tree",
+        "branches": [
+            {
+                "condition": "(cough OR shortness_of_breath OR pleuritic_chest_pain) AND oxygen_requirement AND radiographic_infiltrates",
+                "name": "Confirmed CAP diagnosis",
+                "branches": [
+                    {
+                        "condition": "patient_in_ICU",
+                        "name": "Patient in ICU",
+                        "branches": [
+                            {
+                                "condition": "risk_for_pseudomonas",
+                                "name": "Risk for Pseudomonas",
+                                "decision": "Use Hospital-Acquired Pneumonia (HAP) recommendations"
+                            },
+                            {
+                                "condition": "NOT risk_for_pseudomonas AND NOT severe_pcn_allergy",
+                                "name": "ICU CAP without Pseudomonas risk and no severe PCN allergy",
+                                "decision": "Ceftriaxone 1 g IV Q24H PLUS Azithromycin 500 mg IV Q24H"
+                            },
+                            {
+                                "condition": "NOT risk_for_pseudomonas AND severe_pcn_allergy",
+                                "name": "ICU CAP without Pseudomonas risk and with severe PCN allergy",
+                                "decision": "Moxifloxacin 400 mg IV Q24H"
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "NOT patient_in_ICU",
+                        "name": "Patient NOT in ICU",
+                        "branches": [
+                            {
+                                "condition": "severe_pcn_allergy",
+                                "name": "Severe PCN allergy",
+                                "decision": "Moxifloxacin 400 mg IV/PO Q24H"
+                            },
+                            {
+                                "condition": "NOT severe_pcn_allergy",
+                                "name": "No severe PCN allergy",
+                                "decision": "Ampicillin/sulbactam 1.5 g IV Q6H PLUS (Azithromycin 500 mg IV/PO daily OR Doxycycline 100 mg IV/PO BID) OR Ceftriaxone 1 g IV Q24H PLUS (Azithromycin 500 mg IV/PO daily OR Doxycycline 100 mg IV/PO BID) OR Cefdinir 300 mg PO Q12H PLUS (Azithromycin 500 mg PO daily OR Doxycycline 100 mg PO BID)"
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "necrotizing_cavitary_pneumonia AND preceding_or_concomitant_influenza_like_illness",
+                        "name": "Necrotizing cavitary CAP with influenza-like illness",
+                        "decision": "Add Linezolid 600 mg IV/PO Q12H to CAP regimen while awaiting culture data"
+                    },
+                    {
+                        "condition": "pcn_susceptible_s_pneumoniae",
+                        "name": "Pathogen-specific: S. pneumoniae PCN susceptible",
+                        "decision": "Penicillin G 1.5 million units IV Q6H OR Amoxicillin 500 mg PO Q8H; if non-severe PCN allergy: Cefdinir 300 mg PO Q12H; if severe PCN allergy: Azithromycin regimen OR Moxifloxacin 400 mg IV/PO daily"
+                    },
+                    {
+                        "condition": "pcn_intermediate_s_pneumoniae OR urine_antigen_positive_s_pneumoniae",
+                        "name": "Pathogen-specific: S. pneumoniae PCN intermediate or urine antigen positive",
+                        "decision": "Penicillin G 1.5 million units IV Q6H OR Amoxicillin 1 g PO Q8H; allergy management same as PCN susceptible"
+                    },
+                    {
+                        "condition": "pcn_resistant_cephalosporin_susceptible_s_pneumoniae",
+                        "name": "Pathogen-specific: S. pneumoniae PCN resistant, cephalosporin susceptible",
+                        "decision": "Ceftriaxone 1 g IV Q24H OR Cefdinir 300 mg PO Q12H; if PCN allergy: Moxifloxacin 400 mg IV/PO Q24H"
+                    },
+                    {
+                        "condition": "non_beta_lactamase_h_influenzae",
+                        "name": "Pathogen-specific: H. influenzae non-beta-lactamase producing",
+                        "decision": "Ampicillin 1 g IV Q6H OR Amoxicillin 500 mg PO Q8H; if PCN allergy: multiple oral/IV options including Azithromycin regimen, Cefdinir, Doxycycline, or Moxifloxacin"
+                    },
+                    {
+                        "condition": "beta_lactamase_h_influenzae",
+                        "name": "Pathogen-specific: H. influenzae beta-lactamase producing",
+                        "decision": "Ampicillin/sulbactam 1.5 g Q6H OR Amoxicillin/clavulanate 875 mg PO Q12H; if PCN allergy: Azithromycin regimen, Cefdinir, Doxycycline, or Moxifloxacin"
+                    },
+                    {
+                        "condition": "l_pneumophila_detected",
+                        "name": "Pathogen-specific: Legionella pneumophila",
+                        "decision": "Azithromycin 500 mg IV/PO Q24H OR Moxifloxacin 400 mg IV/PO Q24H (duration per guideline)"
+                    },
+                    {
+                        "condition": "culture_and_urine_antigen_negative",
+                        "name": "Culture/urine antigen negative, no atypical suspicion",
+                        "decision": "Cefdinir 300 mg PO BID OR Amoxicillin/clavulanate XR 2 g PO Q12H; if PCN allergy: Moxifloxacin 400 mg IV/PO Q24H"
+                    }
+                ]
+            }
+        ]
+    }
+}

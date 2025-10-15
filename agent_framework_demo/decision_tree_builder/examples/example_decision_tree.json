@@ -1,0 +1,142 @@
+{
+    "title": "Community-Acquired Pneumonia (CAP®)",
+    "indicators": [
+        { "name": "cough", "description": "Patient has cough symptom" },
+        { "name": "shortness_of_breath", "description": "Patient experiences shortness of breath" },
+        { "name": "pleuritic_chest_pain", "description": "Patient has pleuritic chest pain" },
+        { "name": "oxygen_requirement", "description": "Patient requires supplemental oxygen" },
+        { "name": "radiographic_infiltrates", "description": "Radiographic imaging shows infiltrates" },
+        { "name": "icu_admission", "description": "Patient is admitted to the Intensive Care Unit" },
+        { "name": "risk_for_pseudomonas", "description": "Patient has risk factors for Pseudomonas infection" },
+        { "name": "bronchiectasis", "description": "Presence of bronchiectasis or structural lung disease" },
+        { "name": "recent_broad_spectrum_antibiotics", "description": "Broad-spectrum antibiotics > 7 days in past month" },
+        { "name": "recent_prolonged_hospitalization", "description": "Hospitalization > 7 days in past 3 months" },
+        { "name": "nursing_home_resident", "description": "Admitted from or resided in nursing facility in past 3 months" },
+        { "name": "recent_mechanical_ventilation", "description": "Mechanical ventilation > 48 hours recently" },
+        { "name": "immunocompromised", "description": "Immunocompromised due to conditions or medications" },
+        { "name": "severe_pcn_allergy", "description": "History of severe penicillin allergy" },
+        { "name": "non_severe_pcn_allergy", "description": "History of non-severe penicillin allergy" },
+        { "name": "necrotizing_pneumonia_with_cavitation", "description": "Necrotizing pneumonia with cavitation present" },
+        { "name": "influenza_like_illness", "description": "Preceding or concomitant influenza-like illness" },
+        { "name": "positive_s_pneumoniae_culture", "description": "Culture positive for Streptococcus pneumoniae" },
+        { "name": "s_pneumoniae_pcn_susceptible", "description": "S. pneumoniae isolate susceptible to penicillin" },
+        { "name": "s_pneumoniae_pcn_intermediate", "description": "S. pneumoniae isolate intermediate to penicillin" },
+        { "name": "s_pneumoniae_pcn_resistant", "description": "S. pneumoniae isolate resistant to penicillin" },
+        { "name": "s_pneumoniae_cephalosporin_susceptible", "description": "S. pneumoniae isolate susceptible to cephalosporins" },
+        { "name": "positive_h_influenzae_culture", "description": "Culture positive for Haemophilus influenzae" },
+        { "name": "h_influenzae_ampicillin_susceptible", "description": "H. influenzae isolate susceptible to ampicillin" },
+        { "name": "h_influenzae_ampicillin_resistant", "description": "H. influenzae isolate resistant to ampicillin (beta-lactamase producing)" },
+        { "name": "positive_legionella_antigen", "description": "Legionella urine antigen test positive" },
+        { "name": "culture_and_antigen_negative", "description": "Both culture and urine antigen tests negative" }
+    ],
+    "decision_tree": {
+        "node": "Diagnosis of CAP requires symptoms plus oxygen need and radiographic infiltrates",
+        "branches": [
+            {
+                "condition": "(cough OR shortness_of_breath OR pleuritic_chest_pain) AND oxygen_requirement AND radiographic_infiltrates",
+                "name": "Confirmed CAP",
+                "branches": [
+                    {
+                        "condition": "icu_admission",
+                        "name": "ICU patient",
+                        "branches": [
+                            {
+                                "condition": "risk_for_pseudomonas OR bronchiectasis OR recent_broad_spectrum_antibiotics OR recent_prolonged_hospitalization OR nursing_home_resident OR recent_mechanical_ventilation OR immunocompromised",
+                                "name": "ICU patient with pseudomonas risk",
+                                "decision": "Use Hospital-Acquired Pneumonia (HAP) recommendations"
+                            },
+                            {
+                                "condition": "NOT (risk_for_pseudomonas OR bronchiectasis OR recent_broad_spectrum_antibiotics OR recent_prolonged_hospitalization OR nursing_home_resident OR recent_mechanical_ventilation OR immunocompromised)",
+                                "name": "ICU patient without pseudomonas risk",
+                                "branches": [
+                                    {
+                                        "condition": "severe_pcn_allergy",
+                                        "name": "Severe PCN allergy",
+                                        "decision": "Moxifloxacin 400 mg IV Q24H"
+                                    },
+                                    {
+                                        "condition": "NOT severe_pcn_allergy",
+                                        "name": "No severe PCN allergy",
+                                        "decision": "Ceftriaxone 1 g IV Q24H PLUS Azithromycin 500 mg IV Q24H"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "NOT icu_admission",
+                        "name": "Non-ICU patient",
+                        "branches": [
+                            {
+                                "condition": "severe_pcn_allergy",
+                                "name": "Severe PCN allergy",
+                                "decision": "Moxifloxacin 400 mg IV/PO Q24H"
+                            },
+                            {
+                                "condition": "NOT severe_pcn_allergy",
+                                "name": "No severe PCN allergy",
+                                "decision": "Ampicillin/sulbactam 1.5 g IV Q6H PLUS (Azithromycin 500 mg daily OR Doxycycline 100 mg BID) OR Ceftriaxone 1 g IV Q24H PLUS (Azithromycin 500 mg daily OR Doxycycline 100 mg BID) OR Cefdinir 300 mg PO Q12H PLUS (Azithromycin 500 mg daily OR Doxycycline 100 mg BID)"
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "necrotizing_pneumonia_with_cavitation AND influenza_like_illness",
+                        "name": "Necrotizing pneumonia with cavitation and influenza-like illness",
+                        "decision": "Add Linezolid 600 mg IV/PO Q12H to regimen while awaiting cultures; consult ID"
+                    },
+                    {
+                        "condition": "positive_s_pneumoniae_culture AND s_pneumoniae_pcn_susceptible",
+                        "name": "S. pneumoniae PCN susceptible",
+                        "branches": [
+                            {
+                                "condition": "non_severe_pcn_allergy",
+                                "name": "Non-severe PCN allergy",
+                                "decision": "Cefdinir 300 mg PO Q12H"
+                            },
+                            {
+                                "condition": "severe_pcn_allergy",
+                                "name": "Severe PCN allergy",
+                                "decision": "Azithromycin (specific regimen) OR Moxifloxacin if Erythromycin resistant"
+                            },
+                            {
+                                "condition": "NOT (non_severe_pcn_allergy OR severe_pcn_allergy)",
+                                "name": "No PCN allergy",
+                                "decision": "Penicillin G 1.5 million units IV Q6H OR Amoxicillin 500 mg PO Q8H"
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "positive_s_pneumoniae_culture AND s_pneumoniae_pcn_intermediate",
+                        "name": "S. pneumoniae PCN intermediate or urine antigen positive",
+                        "decision": "Penicillin G 1.5 million units IV Q6H OR Amoxicillin 1 g PO Q8H (adjust for allergy as per PCN susceptible)"
+                    },
+                    {
+                        "condition": "positive_s_pneumoniae_culture AND s_pneumoniae_pcn_resistant AND s_pneumoniae_cephalosporin_susceptible",
+                        "name": "S. pneumoniae PCN resistant, cephalosporin susceptible",
+                        "decision": "Ceftriaxone 1 g IV Q24H OR Cefdinir 300 mg PO Q12H; if PCN allergy use Moxifloxacin"
+                    },
+                    {
+                        "condition": "positive_h_influenzae_culture AND h_influenzae_ampicillin_susceptible",
+                        "name": "H. influenzae ampicillin susceptible",
+                        "decision": "Ampicillin 1 g IV Q6H OR Amoxicillin 500 mg PO Q8H; adjust for allergy (Azithromycin, Cefdinir, Doxycycline, or Moxifloxacin)"
+                    },
+                    {
+                        "condition": "positive_h_influenzae_culture AND h_influenzae_ampicillin_resistant",
+                        "name": "H. influenzae ampicillin resistant",
+                        "decision": "Ampicillin/sulbactam 1.5 g Q6H OR Amoxicillin/clavulanate 875 mg PO Q12H; adjust for allergy (Azithromycin, Cefdinir, Doxycycline, or Moxifloxacin)"
+                    },
+                    {
+                        "condition": "positive_legionella_antigen",
+                        "name": "Legionella infection",
+                        "decision": "Azithromycin 500 mg IV/PO Q24H OR Moxifloxacin 400 mg IV/PO Q24H (adjust duration for PCN allergy)"
+                    },
+                    {
+                        "condition": "culture_and_antigen_negative",
+                        "name": "Culture and antigen negative",
+                        "decision": "Cefdinir 300 mg PO BID OR Amoxicillin/clavulanate XR 2 g PO Q12H; if PCN allergy use Moxifloxacin"
+                    }
+                ]
+            }
+        ]
+    }
+}

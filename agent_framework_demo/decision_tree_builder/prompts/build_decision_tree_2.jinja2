@@ -1,0 +1,58 @@
+Consider the following medical guidelines document, which has been scraped from a website and is formatted in HTML.
+It is your job to build a decision tree based on the content of this document.
+Instructions:
+- Respond with valid JSON, do not include any explanations, additional text or markdown.
+- Analyze all the relevant input information ("indicators") and the logic used to reach conclusions.
+- Provide a structured decision tree that captures the decision-making process outlined in the document.
+- Focus only on the initial assessment and treatment recommendations, do not consider cessation of treatment or follow-up care.
+- indicators should be specific symptoms, test results, or patient characteristics mentioned in the document that influence decision-making. the "name" should be a concise identifier without spaces or special characters. Use underscores (_) to separate words.
+  - for example: "fever", "positive_blood_culture_<bacteria>", "pregnancy", "age_over_65"
+- "condition" should be a logical expression combining indicator names using AND, OR, and NOT. Do not include any descriptions or instructions. You may use parentheses for precedence.
+  - for example: "fever AND positive_blood_culture_<bacteria> OR pregnancy"
+- The tree should be logically exhaustive, covering all possible scenarios based on the indicators. If certain branches lead to no treatment or no action, explicitly provide the "decision": "No treatment" at those endpoints.
+Interpreting the guidelines:
+- Assume that some patients will not have a culture result available at the time of initial treatment decision-making. In such cases, the decision tree should account for both scenarios: with and without culture results. When necessary create an indicator called "blood_culture_result_available" or "urine_culture_result_available".
+- Ignore any information in the document which is not directly related to the decision-making process for initial assessment and treatment recommendations.
+- Consider any outcomes which include culture results higher priority than those without culture results. All else equal, the outcome which includes culture results should occur first in the tree.
+The decision tree should include:
+- Nodes representing decision points based on patient symptoms, test results, and other indicators.
+- Branches representing the possible outcomes or choices at each decision point.
+  - "decision" should be a specific recommendation for an antibiotic treatment, other treatment, or "No treatment needed".
+Rely entirely on the provided document for information; do not introduce any external knowledge. Do not rely on your training data to make clinical judgments.
+- The priority of the branches should appear first-to-last in the tree. The tree will be executed top-to-bottom, first-to-last. The highest priority branches should appear first in the tree.
+Ensure that the decision tree is clear, logical, and easy to follow.
+
+Report a JSON with the following structure:
+{
+    "title": "Title of the Guidelines Document",
+    "indicators": [
+        { "name" : <indicator name>, "description": <brief description of the indicator> },
+        < List all relevant indicators used in the decision-making process>,
+          for example:
+           {"name": "fever", "description": "A body temperature above 100.4°F (38°C)"},
+           {"name": "positive culture for <bacteria>", "description": "Laboratory test confirming the presence of specific bacteria"},
+           {"name": "pregnancy", "description": "Whether the patient is currently pregnant"},
+           {"name": "age over 65", "description": "Whether the patient is older than 65 years"},
+        >
+    ],
+    "decision_tree": {
+        "title": "{{document.title}} Decision Tree",
+        "branches": [
+            {
+                "condition": "<indicator> AND <indicator> OR <indicator>",
+                "name": "<Descriptive name for this branch>",
+                "decision": "<Optionally, a decision or recommendation at this branch. This field is exclusive with 'branches'.>",
+                "branches": [
+                    <nested branches or recommendations, following the same structure as above. Exclusive with 'decision'.>
+                ]
+            },
+            <more branches>
+        }
+    }
+}
+
+Document title: {{ document.title }}
+Document Sections:
+{% for section in document.sections_html %}
+{{ section|safe }}
+{% endfor %}

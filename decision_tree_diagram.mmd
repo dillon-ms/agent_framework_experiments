@@ -1,0 +1,39 @@
+flowchart TD
+    N1["Community-Acquired Pneumonia (CAP®) Decision Tree"]
+    N2["Confirmed CAP diagnosis<br/><br/>Condition: (cough OR shortness_of_breath OR pleuritic_chest_pain) AND oxygen_requirement AND radiographic_infiltrates"]
+    N1 --> N2
+    N3["Patient in ICU<br/><br/>Condition: patient_in_ICU"]
+    N2 --> N3
+    N4["Risk for Pseudomonas<br/><br/>Condition: risk_for_pseudomonas<br/><br/>Decision: Use Hospital-Acquired Pneumonia (HAP) recommendations"]
+    N3 --> N4
+    N5["ICU CAP without Pseudomonas risk and no severe PCN allergy<br/><br/>Condition: NOT risk_for_pseudomonas AND NOT severe_pcn_allergy<br/><br/>Decision: Ceftriaxone 1 g IV Q24H PLUS Azithromycin 500 mg IV Q24H"]
+    N3 --> N5
+    N6["ICU CAP without Pseudomonas risk and with severe PCN allergy<br/><br/>Condition: NOT risk_for_pseudomonas AND severe_pcn_allergy<br/><br/>Decision: Moxifloxacin 400 mg IV Q24H"]
+    N3 --> N6
+    N7["Patient NOT in ICU<br/><br/>Condition: NOT patient_in_ICU"]
+    N2 --> N7
+    N8["Severe PCN allergy<br/><br/>Condition: severe_pcn_allergy<br/><br/>Decision: Moxifloxacin 400 mg IV/PO Q24H"]
+    N7 --> N8
+    N9["No severe PCN allergy<br/><br/>Condition: NOT severe_pcn_allergy<br/><br/>Decision: Ampicillin/sulbactam 1.5 g IV Q6H PLUS (Azithromycin 500 mg IV/PO daily OR Doxycycline 100 mg IV/PO BID) OR Ceftriaxone 1 g IV Q24H PLUS (Azithromycin 500 mg IV/PO daily OR Doxycycline 100 mg IV/PO BID) OR Cefdinir 300 mg PO Q12H PLUS (Azithromycin 500 mg PO daily OR Doxycycline 100 mg PO BID)"]
+    N7 --> N9
+    N10["Necrotizing cavitary CAP with influenza-like illness<br/><br/>Condition: necrotizing_cavitary_pneumonia AND preceding_or_concomitant_influenza_like_illness<br/><br/>Decision: Add Linezolid 600 mg IV/PO Q12H to CAP regimen while awaiting culture data"]
+    N2 --> N10
+    N11["Pathogen-specific: S. pneumoniae PCN susceptible<br/><br/>Condition: pcn_susceptible_s_pneumoniae<br/><br/>Decision: Penicillin G 1.5 million units IV Q6H OR Amoxicillin 500 mg PO Q8H; if non-severe PCN allergy: Cefdinir 300 mg PO Q12H; if severe PCN allergy: Azithromycin regimen OR Moxifloxacin 400 mg IV/PO daily"]
+    N2 --> N11
+    N12["Pathogen-specific: S. pneumoniae PCN intermediate or urine antigen positive<br/><br/>Condition: pcn_intermediate_s_pneumoniae OR urine_antigen_positive_s_pneumoniae<br/><br/>Decision: Penicillin G 1.5 million units IV Q6H OR Amoxicillin 1 g PO Q8H; allergy management same as PCN susceptible"]
+    N2 --> N12
+    N13["Pathogen-specific: S. pneumoniae PCN resistant, cephalosporin susceptible<br/><br/>Condition: pcn_resistant_cephalosporin_susceptible_s_pneumoniae<br/><br/>Decision: Ceftriaxone 1 g IV Q24H OR Cefdinir 300 mg PO Q12H; if PCN allergy: Moxifloxacin 400 mg IV/PO Q24H"]
+    N2 --> N13
+    N14["Pathogen-specific: H. influenzae non-beta-lactamase producing<br/><br/>Condition: non_beta_lactamase_h_influenzae<br/><br/>Decision: Ampicillin 1 g IV Q6H OR Amoxicillin 500 mg PO Q8H; if PCN allergy: multiple oral/IV options including Azithromycin regimen, Cefdinir, Doxycycline, or Moxifloxacin"]
+    N2 --> N14
+    N15["Pathogen-specific: H. influenzae beta-lactamase producing<br/><br/>Condition: beta_lactamase_h_influenzae<br/><br/>Decision: Ampicillin/sulbactam 1.5 g Q6H OR Amoxicillin/clavulanate 875 mg PO Q12H; if PCN allergy: Azithromycin regimen, Cefdinir, Doxycycline, or Moxifloxacin"]
+    N2 --> N15
+    N16["Pathogen-specific: Legionella pneumophila<br/><br/>Condition: l_pneumophila_detected<br/><br/>Decision: Azithromycin 500 mg IV/PO Q24H OR Moxifloxacin 400 mg IV/PO Q24H (duration per guideline)"]
+    N2 --> N16
+    N17["Culture/urine antigen negative, no atypical suspicion<br/><br/>Condition: culture_and_urine_antigen_negative<br/><br/>Decision: Cefdinir 300 mg PO BID OR Amoxicillin/clavulanate XR 2 g PO Q12H; if PCN allergy: Moxifloxacin 400 mg IV/PO Q24H"]
+    N2 --> N17
+
+    %% Styling
+    classDef decisionNode fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef leafNode fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef endNode fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
