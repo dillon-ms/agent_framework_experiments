@@ -1,0 +1,34 @@
+
+Instructions:
+- Read through these notes of mine and write 3-5 key points of impact for my performance assessment related to each of these topics D&I, Security, Individual Contributions, Contributions to the success of others, Built on the work of others. Provide a complete quote with date if possible for each of your quotes.
+- This is for my "connect", which is an internal performance review document which I will fill out, be sure to include anything I mentioned as being relevant to my connect for this time period.
+- Include multiple examples of each topic if possible. If I made any notes of people complimenting my work or thanking me for help, include them.
+- If there are multiple examples of something, provide a brief summary of them, and cite all of them.
+- Organize your response in markdown format with headings for each topic and bullet points for each key point.
+- Write in a telegraphic style, as if writing a resume. Avoid "I did this" or "You did this" simply state "did this".
+- Assume any "TODO"s were completed but just not notated as such.
+- Under "General Summary" provide a list of major accomplishments without regard for the topics. Provide all relevant quotes for each.
+- The current date is {date}. The current quarters is {quarter}. Focus on information from this quarter. Ignore previous quarters.
+
+example format:
+```
+# General Summary
+- <Bullet points, each lists a major accomplishment made over the relevant time period. Don't be limited by the categories here>
+  > <citation 1>
+
+  > <citation 2>
+etc...
+
+# Connect
+## <Section name>
+### <Example 1 Title, this is an example of my behavior for this section>
+  <Summary of this example, summarize your citations in approx 2 sentences.>
+  **Citations:**
+  > <citation 1>
+
+  > <citation 2>
+
+etc...
+```
+Here are my notes:
+{notes}
