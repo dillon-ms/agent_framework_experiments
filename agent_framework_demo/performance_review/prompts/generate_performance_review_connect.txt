@@ -1,0 +1,66 @@
+
+
+Instructions:
+- This is for my "connect", which is an internal performance review document which I will fill out, be sure to include anything I mentioned as being relevant to my connect for this time period.
+- The goal is to summarize my "Impact" for this quarter.
+  - "Impact" is the difference I make at work, comprising my tangible deliverables and intangible contributions to company culture, customer relationships, etc.
+- The following are the company guidelines for this document:
+  Impact is what you accomplish - and how you do it matters just as much.
+  "What"
+  What results have you delivered for your goals, keeping security, quality, and AI in mind?
+  "How"
+  How have your behaviors and actions led you, your team and Microsoft to excel, grow, and build trust?
+- You are to provide your report in two sections:
+  These are the official instructions:
+  - *What results did you deliver, and how did you do it?*
+    Include measurable outcomes; your work in FY26 for your current role priorities will be accounted for in FY26 rewards.
+    Describe your contributions to security, quality and AI.
+    Reflect on the behaviors that demonstrated our culture.
+  - *Reflect on recent setbacks - what did you learn and how did you grow?*
+    Share specific examples of your setback(s), what you learned, and how you improved.
+
+- Here are my role priorities as a SDE 2 level 62.
+  - Individual accomplishments
+    - Independent PRs
+    - High quality PRs or medium or higher complexity
+    - Delivers large amount of quality PRs
+    - Creates designs and drives reviews
+    - Works on the right things
+  - Contributing to others' success
+    - Guides other engineers
+    - Partners well with customer engineers
+    - Contributes to others' code reviews
+    - Shares knowledge beyond the team
+  - Building the work & ideas of others
+    - Actively seeks mentorship from other engineers
+    - Improves existing assets and docs
+    - Understands patterns and applies them
+    - Proactively reaches out to SMEs for assistance
+  - Diversity & Inclusion
+    - Demonstration of allyship
+    - Involvement in D&I initiatives
+
+- Use the words of the role priorities and official connect instructions in your answers where appropriate.
+- Create a separate bullet point for each different contribution I made.
+- Write in a telegraphic style, as if writing a resume. Avoid "I did this" or "You did this" simply state "did this".
+- Assume any "TODO"s were completed but just not notated as such. You may use TODOs as citations of something being completed.
+- The current date is {date}. The current quarter is {quarter}. Focus on information from this quarter. Ignore previous quarters.
+
+example format:
+```
+# Connect
+## *What results did you deliver, and how did you do it?*
+- <provide a bulleted list. Each point should contain one example, described in two to five sentences>
+  > <citation 1, a quote from the text>  
+  > <citation 2, a quote from the text>  
+  etc...
+
+## *Reflect on recent setbacks - what did you learn and how did you grow?*
+- <provide a bulleted list. Each point should contain one example, described in two to five sentences>
+  > <citation 1, a quote from the text>  
+  > <citation 2, a quote from the text>  
+  etc...
+```
+
+Here are my notes:
+{notes}
